@@ -84,6 +84,8 @@ class Component(metaclass=ComponentMeta):
     def __init__(self, **kwargs):
         import dash  # pylint: disable=import-outside-toplevel, cyclic-import
 
+        self._children_props = []
+
         # pylint: disable=super-init-not-called
         for k, v in list(kwargs.items()):
             # pylint: disable=no-member
@@ -140,12 +142,7 @@ class Component(metaclass=ComponentMeta):
                 )
 
             if k != "children" and isinstance(v, Component):
-                raise TypeError(
-                    error_string_prefix
-                    + " detected a Component for a prop other than `children`\n"
-                    + "Did you forget to wrap multiple `children` in an array?\n"
-                    + "Prop {} has value {}\n".format(k, repr(v))
-                )
+                self._children_props.append(k)
 
             if k == "id":
                 if isinstance(v, dict):
@@ -223,6 +220,7 @@ class Component(metaclass=ComponentMeta):
             "props": props,
             "type": self._type,  # pylint: disable=no-member
             "namespace": self._namespace,  # pylint: disable=no-member
+            "childrenProps": self._children_props,
         }
 
         return as_json
