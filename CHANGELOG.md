@@ -2,6 +2,14 @@
 All notable changes to `dash` will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+
+- [#1970](https://github.com/plotly/dash/pull/1970) dcc.Dropdown Refactor fixes:
+  - Fix bug [#1868](https://github.com/plotly/dash/issues/1868) value does not update when selected option removed from options.
+  - Fix bug [#1908](https://github.com/plotly/dash/issues/1908) Selected options not showing when the value contains a comma.
+
 ## [2.3.0] - 2022-03-13
 
 ### Added
